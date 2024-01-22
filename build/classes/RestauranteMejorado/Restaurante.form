@@ -277,21 +277,33 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="-1"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenosHamburButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="MenosCerveButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="-1"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenosCerveButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="MenosSandButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="-1"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenosSandButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="MenosSalatButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="-1"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenosSalatButtonActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
           <AuxValues>
@@ -310,7 +322,12 @@
                       <Data value="Sandwich"/>
                       <Data value="Cerveza"/>
                     </Column>
-                    <Column editable="true" title="Cantidad" type="java.lang.Integer"/>
+                    <Column editable="true" title="Cantidad" type="java.lang.Integer">
+                      <Data value="0"/>
+                      <Data value="0"/>
+                      <Data value="0"/>
+                      <Data value="0"/>
+                    </Column>
                     <Column editable="true" title="Precio" type="java.lang.Double">
                       <Data value="15.0"/>
                       <Data value="7.0"/>

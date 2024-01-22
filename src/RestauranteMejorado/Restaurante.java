@@ -4,6 +4,7 @@
  */
 package RestauranteMejorado;
 
+import java.text.DecimalFormat;
 import javax.swing.JTextArea;
 
 /**
@@ -131,19 +132,39 @@ public class Restaurante extends javax.swing.JFrame {
         });
 
         MenosHamburButton.setText("-1");
+        MenosHamburButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenosHamburButtonActionPerformed(evt);
+            }
+        });
 
         MenosCerveButton.setText("-1");
+        MenosCerveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenosCerveButtonActionPerformed(evt);
+            }
+        });
 
         MenosSandButton.setText("-1");
+        MenosSandButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenosSandButtonActionPerformed(evt);
+            }
+        });
 
         MenosSalatButton.setText("-1");
+        MenosSalatButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenosSalatButtonActionPerformed(evt);
+            }
+        });
 
         ContenidoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Hamburguesa", null,  new Double(15.0)},
-                {"Ensalada", null,  new Double(7.0)},
-                {"Sandwich", null,  new Double(3.0)},
-                {"Cerveza", null,  new Double(1.0)}
+                {"Hamburguesa",  new Integer(0),  new Double(15.0)},
+                {"Ensalada",  new Integer(0),  new Double(7.0)},
+                {"Sandwich",  new Integer(0),  new Double(3.0)},
+                {"Cerveza",  new Integer(0),  new Double(1.0)}
             },
             new String [] {
                 "Alimento", "Cantidad", "Precio"
@@ -290,7 +311,15 @@ public class Restaurante extends javax.swing.JFrame {
     }//GEN-LAST:event_SalirButtonActionPerformed
 
     private void LimpiarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarButtonActionPerformed
-        // TODO add your handling code here:
+        int cero=0;
+        ContenidoTable.setValueAt(cero, 0, 1); 
+        ContenidoTable.setValueAt(cero, 1, 1); 
+        ContenidoTable.setValueAt(cero, 2, 1); 
+        ContenidoTable.setValueAt(cero, 3, 1); 
+        
+        calcularSubtotal();
+        ImpuestosTextField1.setText(calcularImpuestos());
+        
     }//GEN-LAST:event_LimpiarButtonActionPerformed
 
     private void HamburguesaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HamburguesaButtonActionPerformed
@@ -323,7 +352,47 @@ public class Restaurante extends javax.swing.JFrame {
 
     private void AceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarButtonActionPerformed
         calcularSubtotal();
+        ImpuestosTextField1.setText(calcularImpuestos());
     }//GEN-LAST:event_AceptarButtonActionPerformed
+
+    private void MenosHamburButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenosHamburButtonActionPerformed
+      int AnteriorCantidad=(int) ContenidoTable.getValueAt(0, 1);
+      int NuevaCantidad=  --AnteriorCantidad;
+      if(NuevaCantidad>=0){
+        ContenidoTable.setValueAt(NuevaCantidad, 0, 1);
+        }
+      
+    }//GEN-LAST:event_MenosHamburButtonActionPerformed
+
+    private void MenosCerveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenosCerveButtonActionPerformed
+      int AnteriorCantidad=(int) ContenidoTable.getValueAt(3, 1);
+      int NuevaCantidad=  --AnteriorCantidad;
+      if(NuevaCantidad>=0){
+         ContenidoTable.setValueAt(NuevaCantidad, 3, 1);  
+      }
+      
+      
+    }//GEN-LAST:event_MenosCerveButtonActionPerformed
+
+    private void MenosSandButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenosSandButtonActionPerformed
+      int AnteriorCantidad=(int) ContenidoTable.getValueAt(2, 1);
+      int NuevaCantidad=  --AnteriorCantidad;
+      if(NuevaCantidad>=0){
+           ContenidoTable.setValueAt(NuevaCantidad, 2, 1);
+          
+      }
+      
+      
+    }//GEN-LAST:event_MenosSandButtonActionPerformed
+
+    private void MenosSalatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenosSalatButtonActionPerformed
+            int AnteriorCantidad=(int) ContenidoTable.getValueAt(1, 1);
+      int NuevaCantidad=  --AnteriorCantidad;
+      if(NuevaCantidad>=0){
+           ContenidoTable.setValueAt(NuevaCantidad, 1, 1);
+          
+      }
+    }//GEN-LAST:event_MenosSalatButtonActionPerformed
 
   
      
@@ -341,14 +410,19 @@ public class Restaurante extends javax.swing.JFrame {
     public double PrecioTotal(int cantidadPosicion, int precioPosicion) {//fila, columna
         int cantidad= (int) ContenidoTable.getValueAt(cantidadPosicion, 1);
         double precio = (double) ContenidoTable.getValueAt(precioPosicion, 2);
-        if(cantidad>0){
-            return cantidad * precio;
-        }else{
-            return 1;
-        }
-        
+         return cantidad * precio;
             
     }
+  
+     public String calcularImpuestos() {
+         
+         DecimalFormat df = new DecimalFormat("##.##");
+         
+         double Calculo=Double.parseDouble(SubtotalTextField.getText())* 0.07;
+
+         return df.format(Calculo);
+
+     }
     
     
       
